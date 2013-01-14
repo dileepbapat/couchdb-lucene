@@ -227,6 +227,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <copyright>2013,rnewson</copyright>
                     <group>Database</group>
                     <prefix>/usr/share</prefix>
                     <defineStatements>
