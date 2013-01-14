@@ -268,9 +268,11 @@
                             <filemode>750</filemode>
                             <username>couchlucene</username>
                             <groupname>couchlucene</groupname>
-                            <source>
-                                <location>tools/etc/init.d/couchdb-lucene</location>
-                            </source>
+                            <sources>
+                            	<source>
+                                <location>src/main/tools/etc/init.d/couchdb-lucene</location>
+                                </source>
+                            </sources>
                         </mapping>
                         <mapping>
                             <directory>/usr/share/couchdb-lucene/lib</directory>
