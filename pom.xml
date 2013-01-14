@@ -215,6 +215,86 @@
                 <downloadJavadocs>true</downloadJavadocs>
               </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.1-alpha-1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <copyright>Apache</copyright>
+                    <group>Datebase</group>
+                    <prefix>/usr/share</prefix>
+                    <defineStatements>
+                        <defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
+                    </defineStatements>
+                    <mappings>
+                        <mapping>
+                            <directory>/usr/local/couchdb-lucene/classes</directory>
+                            <filemode>440</filemode>
+                            <username>dumper</username>
+                            <groupname>dumpgroup</groupname>
+                            <sources>
+                                <source>
+                                    <location>target/classes</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/local/couchdb-lucene/lib</directory>
+                            <filemode>750</filemode>
+                            <username>motech</username>
+                            <groupname>motech</groupname>
+                            <dependency>
+                                <includes>
+                                    <include>jmock:jmock</include>
+                                    <include>javax.servlet:servlet-api:2.4</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>junit:junit</exclude>
+                                </excludes>
+                            </dependency>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/local/couchdb-lucene/bin</directory>
+                            <filemode>750</filemode>
+                            <username>motech</username>
+                            <groupname>motech</groupname>
+                            <sources>
+                                <source>
+                                    <location>src/main/bin</location>
+                                </source>
+                                <softlinkSource>
+                                    <location>/usr/local/bin/run</location>
+                                    <destination>src/main/bin/run</destination>
+                                </softlinkSource>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>/usr/local/log/couchdb-lucene</directory>
+                            <filemode>750</filemode>
+                            <username>motech</username>
+                            <groupname>motech</groupname>
+                        </mapping>
+                    </mappings>
+                    <preinstallScriptlet>
+                        <script>echo "installing couchdb-lucene"</script>
+                    </preinstallScriptlet>
+                    <postinstallScriptlet>
+                        <scriptFile>src/main/scripts/postinstall</scriptFile>
+                        <fileEncoding>utf-8</fileEncoding>
+                    </postinstallScriptlet>
+                    <preremoveScriptlet>
+                        <scriptFile>src/main/scripts/preremove</scriptFile>
+                        <fileEncoding>utf-8</fileEncoding>
+                    </preremoveScriptlet>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
