@@ -236,8 +236,8 @@
                         <mapping>
                             <directory>/usr/share/couchdb-lucene/conf</directory>
                             <filemode>440</filemode>
-                            <username>motech</username>
-                            <groupname>motech</groupname>
+                            <username>couchlucene</username>
+                            <groupname>couchlucene</groupname>
                             <sources>
                                 <source>
                                     <location>target/classes</location>
@@ -247,8 +247,8 @@
                         <mapping>
                             <directory>/usr/share/couchdb-lucene/bin</directory>
                             <filemode>750</filemode>
-                            <username>motech</username>
-                            <groupname>motech</groupname>
+                            <username>couchlucene</username>
+                            <groupname>couchlucene</groupname>
                             <sources>
                                 <source>
                                     <location>src/main/bin</location>
@@ -258,28 +258,41 @@
                         <mapping>
                             <directory>/usr/share/couchdb-lucene/lib</directory>
                             <filemode>750</filemode>
-                            <username>motech</username>
-                            <groupname>motech</groupname>
+                            <username>couchlucene</username>
+                            <groupname>couchlucene</groupname>
                             <dependency/>
+                        </mapping>
+                        <mapping>
+                            <directory>/etc/rc.d/init.d/couchdb-lucene</directory>
+                            <filemode>750</filemode>
+                            <username>couchlucene</username>
+                            <groupname>couchlucene</groupname>
+                            <source>
+                                <location>tools/etc/init.d/couchdb-lucene</location>
+                            </source>
                         </mapping>
                         <mapping>
                             <directory>/usr/share/couchdb-lucene/lib</directory>
                             <filemode>750</filemode>
-                            <username>motech</username>
-                            <groupname>motech</groupname>
+                            <username>couchlucene</username>
+                            <groupname>couchlucene</groupname>
                             <artifact/>
                         </mapping>
                     </mappings>
                     <preinstallScriptlet>
-                        <script>echo "installing couchdb-lucene"</script>
+                        <script>
+                            useradd -r -c "Couchdb-Lucene user" -d /usr/share/couchdb-lucene couchlucene
+                        </script>
                     </preinstallScriptlet>
                     <postinstallScriptlet>
-                        <scriptFile>src/main/scripts/postinstall</scriptFile>
-                        <fileEncoding>utf-8</fileEncoding>
+                        <script>
+                            /sbin/chkconfig --add couchdb-lucene
+                        </script>
                     </postinstallScriptlet>
                     <preremoveScriptlet>
-                        <scriptFile>src/main/scripts/preremove</scriptFile>
-                        <fileEncoding>utf-8</fileEncoding>
+                        <script>
+                            userdel couchlucene
+                        </script>
                     </preremoveScriptlet>
                 </configuration>
             </plugin>
