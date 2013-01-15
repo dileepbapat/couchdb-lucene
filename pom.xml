@@ -299,6 +299,26 @@
                     </preremoveScriptlet>
                 </configuration>
             </plugin>
+  		<plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+				<phase>assembly</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>${project.basedir}/src/main/tools/debian-build.sh</executable>
+                            <workingDirectory>${modules.root.dir}</workingDirectory>
+                            <commandlineArgs>
+                                -v ${project.version} -b ${modules.root.dir}
+                            </commandlineArgs>
+                        </configuration>
+                    </plugin>
         </plugins>
     </build>
 </project>

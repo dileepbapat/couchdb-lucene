@@ -19,6 +19,7 @@
   <formats>
     <format>zip</format>
     <format>tar.gz</format>
+    <format>dir</format>
   </formats>
   <fileSets>
     <fileSet>
@@ -65,6 +66,11 @@
       <source>${project.basedir}/src/main/tools/etc/init.d/couchdb-lucene</source>
       <fileMode>755</fileMode>
       <outputDirectory>/tools/etc/init.d/couchdb-lucene</outputDirectory>
+    </file>
+    <file>
+      <source>${project.basedir}/src/main/tools/etc/init.d/couchdb-lucene.deb</source>
+      <fileMode>755</fileMode>
+      <outputDirectory>/</outputDirectory>
     </file>
   </files>
   <dependencySets>
